@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>Záľuby členov tímu</title>
+
+	<link rel="stylesheet" href="./css/root.css">
+	<link rel="stylesheet" href="./css/navbar.css">
+	<link rel="stylesheet" href="./css/main.css">
+	<link rel="stylesheet" href="./css/footer.css">
+</head>
+
+<body>
+	<header class="navbar" role="banner">
+        <div class="navbar__container">
+            <a href="#" class="navbar__brand" aria-label="Homepage">Budúci Bakalári</a>
+            
+            <!-- Dark Mode Switch -->
+            <button class="navbar__toggle" 
+			id="navbarToggle" 
+                    aria-label="Toggle navigation" 
+                    aria-controls="navbarMenu" 
+                    aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            
+            <nav id="navbarMenu" class="navbar__menu" role="navigation" aria-labelledby="navbarToggle">
+                <ul class="navbar__list">
+                    <li class="navbar__item"><a href="Zaluby_clenov_tymu.html" class="navbar__link">Záľuby členov tímu</a></li>
+                    <li class="navbar__item"><a href="Rozlozenie.html" class="navbar__link">Rozloženie</a></li>
+                    <li class="navbar__item"><a href="Zmeny.html" class="navbar__link">Zmeny</a></li>
+                </ul>
+				<div class="theme-switch">
+					<input type="checkbox" id="themeSwitch" class="theme-switch__input">
+					<label for="themeSwitch" class="theme-switch__label" aria-label="Switch dark mode"></label>
+				</div>
+            </nav>
+        </div>
+    </header>
+<main>
+<section id="sekcia_zmena">
+    <h1>Zmeny v projekte</h1>
+
+    <h3>Prehľad vykonaných zmien</h3>
+    <p>
+        Počas vývoja webovej stránky sme implementovali viaceré vylepšenia s cieľom zlepšiť
+        vizuálnu konzistenciu, prehľadnosť a celkovú používateľskú skúsenosť. 
+        Boli pridané nové komponenty, ako napríklad responzívna navigačná lišta s prepínačom 
+        <strong>Dark Mode</strong> a dynamické prispôsobenie veľkosti písma pomocou jednotiek <code>rem</code>. 
+        Okrem toho sme optimalizovali štruktúru HTML pre lepšiu čitateľnosť a správne použitie 
+        sémantických prvkov ako <code>&lt;header&gt;</code>, <code>&lt;main&gt;</code> a <code>&lt;footer&gt;</code>.
+    </p>
+
+    <h3>UX / UI rozhodnutia</h3>
+    <p>
+        Naším cieľom bolo vytvoriť dizajn, ktorý je jednoduchý, moderný a zároveň prístupný 
+        pre rôzne typy zariadení. Používateľ si môže prepínať medzi svetlým a tmavým režimom 
+        podľa svojich preferencií, pričom toto nastavenie sa ukladá pomocou <code>localStorage</code>.
+        Text a obsah sa prispôsobujú rôznym veľkostiam obrazovky a jednotky <code>rem</code> umožňujú 
+        dynamické zmeny veľkosti písma bez narušenia layoutu.
+    </p>
+
+    <h3>Zmeny pre prístupnosť (Accessibility)</h3>
+    <p>
+        V rámci prístupnosti sme pridali atribúty <code>aria-label</code> pre kľúčové navigačné prvky 
+        (napr. logo, prepínač témy, navigačné menu). Tieto prvky uľahčujú orientáciu používateľom, 
+        ktorí využívajú čítačky obrazovky. Dôraz bol kladený aj na dostatočný kontrast farieb 
+        medzi textom a pozadím, čo zlepšuje čitateľnosť pri použití tmavého aj svetlého režimu. 
+        Okrem toho boli implementované responzívne prvky a správne poradie hierarchie nadpisov 
+        pre jednoduchšiu navigáciu klávesnicou.
+    </p>
+
+    <h3>Externé JavaScript súbory</h3>
+    <p>
+        JavaScript bol použitý ako <strong>externý skript</strong> na riadenie prepínača Dark Mode a 
+        mobilného menu. Kód je oddelený od HTML pre lepšiu údržbu a čitateľnosť. 
+        Implementácia využíva udalosti <code>DOMContentLoaded</code> a <code>addEventListener()</code> 
+        na dynamické správanie stránky bez nutnosti znovunačítania.
+    </p>
+</section>
+</main>
+	<footer>
+		<p>&copy; 2024 Budúci Bakalári. Všetky práva vyhradené.</p>
+	</footer>
+	<script>
+        // A small, accessible script to toggle the mobile menu.
+        document.addEventListener('DOMContentLoaded', function () {
+            const navbarToggle = document.getElementById('navbarToggle');
+            const navbarMenu = document.getElementById('navbarMenu');
+
+            if (navbarToggle && navbarMenu) {
+                navbarToggle.addEventListener('click', function () {
+                    navbarToggle.classList.toggle('is-active');
+                    navbarMenu.classList.toggle('is-active');
+                    const isExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
+                    navbarToggle.setAttribute('aria-expanded', !isExpanded);
+                });
+            }
+        });
+    // Dark mode functionality
+    document.addEventListener('DOMContentLoaded', function () {
+        const themeSwitch = document.getElementById('themeSwitch');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Skontrolovať localStorage alebo systémové nastavenia
+        const currentTheme = localStorage.getItem('theme');
+        
+        if (currentTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeSwitch.checked = true;
+        } else if (currentTheme === 'light') {
+            document.documentElement.setAttribute('data-theme', 'light');
+            themeSwitch.checked = false;
+        } else if (prefersDarkScheme.matches) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeSwitch.checked = true;
+        }
+        
+        // Prepínač témy
+        themeSwitch.addEventListener('change', function() {
+            if (this.checked) {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+            }
+        });
+        
+        // Mobile menu functionality (váš pôvodný kód)
+        const navbarToggle = document.getElementById('navbarToggle');
+        const navbarMenu = document.getElementById('navbarMenu');
+
+        if (navbarToggle && navbarMenu) {
+            navbarToggle.addEventListener('click', function () {
+                navbarToggle.classList.toggle('is-active');
+                navbarMenu.classList.toggle('is-active');
+                const isExpanded = navbarToggle.getAttribute('aria-expanded') === 'true';
+                navbarToggle.setAttribute('aria-expanded', !isExpanded);
+            });
+        }
+    });
+    </script>
+</body>
+</html>
+
