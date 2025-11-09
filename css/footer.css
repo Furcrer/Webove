@@ -1,0 +1,25 @@
+/*footer.css*/     
+
+footer {
+    background-color: var(--color-foreground);
+    color: var(--color-background);
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    border-top: var(--border-style);
+}
+
+/* Responzívne štýly pre footer */
+@media (max-width: 550px) {
+    footer {
+        padding: 15px;
+        font-size: 13px;
+    }
+}
+
+@media (min-width: 1400px) {
+    footer {
+        padding: 25px;
+        font-size: 15px;
+    }
+}

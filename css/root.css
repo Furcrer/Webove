@@ -1,0 +1,107 @@
+/*root.css*/
+
+/*root.css*/
+
+:root {
+    --color-background: #000000;
+    --color-foreground: #ffffff;
+    --color-accent: #ffff00;
+
+    --font-family-mono: 'SF Mono', 'Menlo', 'Consolas', 'Liberation Mono', monospace;
+    --font-weight-bold: 700;
+    
+    --border-width: 3px;
+    --border-style: var(--border-width) solid var(--color-foreground);
+
+    --navbar-height: 80px;
+    --navbar-padding: 1rem;
+    --container-width: 1140px;
+    --transition-speed: 0.15s;
+}
+
+/* Dark mode premenné */
+[data-theme="dark"] {
+    --color-background: #ffffff;
+    --color-foreground: #000000;
+    --color-accent: #ffff00; /* Žltá zostáva rovnaká */
+}
+
+/* Responzívne premenné pre rôzne breakpointy */
+@media (max-width: 550px) {
+    :root {
+        --navbar-height: 70px;
+        --navbar-padding: 0.75rem;
+        --border-width: 2px;
+    }
+}
+
+@media (min-width: 551px) and (max-width: 850px) {
+    :root {
+        --navbar-height: 75px;
+        --navbar-padding: 0.875rem;
+    }
+}
+
+@media (min-width: 851px) and (max-width: 1250px) {
+    :root {
+        --container-width: 95%;
+    }
+}
+
+@media (min-width: 1251px) and (max-width: 1400px) {
+    :root {
+        --container-width: 1200px;
+    }
+}
+
+@media (min-width: 1401px) {
+    :root {
+        --container-width: 1300px;
+    }
+}
+
+
+/*
+========================================
+Global Resets & Brutalist Base Styles
+========================================
+*/
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    border-radius: 0;
+}
+
+body {
+    width: 100vw;
+    margin: 0;
+    font-family: var(--font-family-mono);
+    font-size: 1rem;
+    line-height: 1.5;
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+    overflow-x: hidden;
+    
+    /* Šachovnica + lineárny gradient ktorý ju prekryje v strede */
+    background-image: 
+        linear-gradient(
+            to right,
+            transparent -10%,
+            var(--color-background) 20%,
+            var(--color-background) 82%,
+            transparent 110%
+        ),
+        linear-gradient(45deg, var(--color-foreground) 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, var(--color-foreground) 75%);
+    background-size: 100% 100%, 40px 40px, 40px 40px;
+    background-position: center, 0 0, 20px 20px;
+}
+
+body::after {
+    display: block;
+    text-align: center;
+    height: 200vh;
+    padding-top: 5rem;
+    color: #777;
+}
